@@ -13,23 +13,33 @@ patterns and clean code, while preserving its behavior.
 
 ## Structure
 - `originale/`: the original code, never modified
-- `refactored/`: the refactored version
+- `refactored/`: the refactored version (Maven project; code in `src/main/java`, tests in `src/test/java`)
 - `docs/`: metrics, UML diagrams, refactoring log, report
 
 ## How to run
-**Requirements:** JDK 21 (the code uses `--enable-preview`, so use this exact version)
+**Requirements:**
+- JDK 21 for both versions (the original is compiled with `--enable-preview`, so use this exact version)
+- Maven 3.9+ for the refactored version
+
 Check yours first:
 ```bash
 java --version
 javac --version
+mvn -v
 ```
-Both should report `21`
+Java and javac should report `21`, and Maven should report 3.9 or newer
 
 **Refactored version**
 ```bash
 cd refactored
-javac --enable-preview --release 21 -d bin -sourcepath src src/App.java
-java --enable-preview -cp bin App
+mvn compile
+java -cp target/classes App
+```
+
+**Run tests**
+```bash
+cd refactored
+mvn test
 ```
 
 **Original version**
